@@ -1,0 +1,14 @@
+#map {
+    height: 400px; /* Set the height of the map container */
+    width: 100%; /* Ensure the map container takes up the full width of its parent */
+  }
+
+.tooltip {
+    position: absolute;
+    z-index: 1000;
+    background: white;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    pointer-events: none;
+  }
