@@ -2,16 +2,34 @@
 <html>
 <head>
   <title>Maya Lowlands Archaeological Sites</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <h1>Maya Lowlands Archaeological Sites</h1>
+  <link rel="stylesheet" href="bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  
 
   <div id="map"></div>
 
   <div id="tooltip" class="tooltip"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+  <div class="legend">
+    <div class="legend-title">Legend</div>
+    <div class="legend-item">
+        <div class="legend-color" style="background-color: green;"></div>
+        <div class="legend-text">Pre-Classic</div>
+    </div>
+    <div class="legend-item">
+        <div class="legend-color" style="background-color: yellow;"></div>
+        <div class="legend-text">Classic</div>
+    </div>
+    <div class="legend-item">
+        <div class="legend-color" style="background-color: red;"></div>
+        <div class="legend-text">Post-Classic</div>
+    </div>
+  </div>
+
+  <script src="leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
