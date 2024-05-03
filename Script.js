@@ -1,39 +1,31 @@
-// Create map
-var map = L.map('map').setView([16.8235, -88.7601], 8);
+// Add console.log to check to see if our code is working.
+console.log("working");
 
-// Add basemap
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+
+//create map
+var map = L.map('map').setView[17.195, -88.687],
+
+const map = L.map('map').setView([17.195, -88.687], 8);
+
+const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 10,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-// Load GeoJSON file
-fetch('maya_sites.geojson')
-  .then(response => response.json())
-  .then(data => {
-    // Load CSV file
-    d3.csv('radiocarbon.csv').then(csvData => {
-      // Create an object to store the radiocarbon data
-      var radiocarbonData = {};
-      csvData.forEach(row => {
-        radiocarbonData[row.site_name] = {
-          num_of_dates: row.num_of_dates,
-          date_range: row.date_range,
-          time_period: row.time_period
-        };
-      });
 
-      // Create GeoJSON layer with popups
-      L.geoJSON(data, {
-        onEachFeature: function(feature, layer) {
-          var siteData = radiocarbonData[feature.properties.name];
-          layer.bindPopup(`
-            <strong>${feature.properties.name}</strong><br>
-            Occupation: ${siteData.time_period}<br>
-            Radiocarbon dates: ${siteData.num_of_dates}<br>
-            Date range: ${siteData.date_range}<br>
-            Description: ${feature.properties.description}
-          `);
-        }
-      }).addTo(map);
-    });
-  });
+
+//create tile layer and add basemap
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+
+
+
+
+
+/* js rewritten to fix map functon
+Lines 1- 40 work to create basemap -AG 
+Cross referenced with code in shared folder
+Complete and map is still working*/
