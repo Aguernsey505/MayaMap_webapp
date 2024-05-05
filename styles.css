@@ -1,7 +1,7 @@
-#map {
-    height: 400px; /* Set the height of the map container */
-    width: 100%; /* Ensure the map container takes up the full width of its parent */
-  }
+#mapId {
+    height: 900px;
+    width: 500px;
+}
 
 .tooltip {
     position: absolute;
@@ -12,34 +12,17 @@
     border-radius: 5px;
     pointer-events: none;
   }
-.legend {
+
+  #legend {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-}
+    bottom: 0;
+    right: 0;
+  }
 
-.legend-title {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.legend-color {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin-right: 5px;
-}
-
-.legend-text {
-    font-size: 14px;
-}
+  .popup {
+    font-size: 1;
+  }
+  /* css rewritten to fix map function 
+  Lines 1-14 work to create basemap -AG 
+  Cross reeferenced with code in shared folder
+  Complete and map is still working*/

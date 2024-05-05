@@ -1,3 +1,4 @@
+var mayaSites=
 {
 "type": "FeatureCollection",
 "name": "f25ff816-328c-4597-8a49-c31596c1745f2020330-1-14hzhkn.frh5",
@@ -534,4 +535,4 @@
 { "type": "Feature", "properties": { "FID": 529, "AREA": 0, "PERIMETER": 0, "ARCHR_": 423, "ARCHR_ID": 163, "COUNTRY": "BELIZE", "NAME": "Frenchmans Cay", "POINTSOURC": "NAT. GEOG. LAND OF THE MAYAS", "PROVINCE": 16 }, "geometry": { "type": "Point", "coordinates": [ -88.722093373834994, 16.145542809917199 ] } },
 { "type": "Feature", "properties": { "FID": 530, "AREA": 0, "PERIMETER": 0, "ARCHR_": 424, "ARCHR_ID": 3, "COUNTRY": "MEXICO", "NAME": " ", "POINTSOURC": "NAT. GEOG. LAND OF THE MAYAS", "PROVINCE": 32 }, "geometry": { "type": "Point", "coordinates": [ -92.1020350935229, 16.135794156689698 ] } }
 ]
-}
+};

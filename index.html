@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>MayaMap: An Interactive RadioCarbon Map</title>
   <meta charset="utf-8">
@@ -8,209 +9,631 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
-    
-  body {
-    position: relative; 
-  }
-  #MayaMap {padding-top:50px;height:750px;color: #fff; background-color: #c9c4a8;}
-  #About {padding-top:50px;height:750px;color: #fff; background-color: #aca0c2;}
-  #Authors {padding-top:50px;height:300px;color: #fff; background-color: #7aa471;}
-  #Resources {padding-top:50px;height:300px;color: #fff; background-color: #5f648a;}
+    body {
+      position: relative;
+    }
+
+    #MayaMap {
+      padding-top: 50px;
+      height: 750px;
+      color: #fff;
+      background-color: #c9c4a8;
+    }
+
+    #About {
+      padding-top: 50px;
+      height: 750px;
+      color: #fff;
+      background-color: #aca0c2;
+    }
+
+    #Authors {
+      padding-top: 50px;
+      height: 300px;
+      color: #fff;
+      background-color: #7aa471;
+    }
+
+    #Resources {
+      padding-top: 50px;
+      height: 300px;
+      color: #fff;
+      background-color: #5f648a;
+    }
   </style>
 </head>
+
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">MayaMap</a>
-    </div>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">MayaMap</a>
+      </div>
 
-    <div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li><a href="#MayaMap">MayaMap: An Interactive RadioCarbon Map</a></li>
-          <li><a href="#About">About the Project</a></li>
-          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Attributes<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#Authors">About the Authors</a></li>
-              <li><a href="#Resources">Resources</a></li>
-            </ul>
-          </li>
-        </ul>
+      <div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="#MayaMap">MayaMap: An Interactive RadioCarbon Map</a></li>
+            <li><a href="#About">About the Project</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Attributes<span
+                  class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#Authors">About the Authors</a></li>
+                <li><a href="#Resources">Resources</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-</nav>    
+  </nav>
 
-<div id="MayaMap" class="container-fluid text-center">
-  <h1>MayaMap: An Interactive RadioCarbon Map</h1>
-  <!--Text can be added here about how to use the tool if needed-->
+  <div id="MayaMap" class="container-fluid text-center">
+    <h1>MayaMap: An Interactive RadioCarbon Map</h1>
+    <p>Click a point on the map for site name and time period.</p>
+    <!--Text can be added here about how to use the tool if needed-->
 
 
-  <!--Insert Interactive Map in Section 1-->
-  <base target="_top">
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      
-      <title>Maya Lowlands Archaeology Sites</title>
-  
+    <!--Insert Interactive Map in Section 1-->
+
+
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+      <meta charset="UTF-8">
+      <title>MayaMap: An Interactive RadioCarbon Map</title>
+
       <!--STYLESHEETS-->
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
       <link rel="stylesheet" href="styles.css">
-  
+      <link rel="stylesheet" href="L.Icon.Pulse.css">
+
       <!--SCRIPTS-->
       <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
       <script src="script.js"></script>
-  
+      <script src="mayaSites3.js"></script>
+      <script src="L.Icon.Pulse.js"></script>
       <style>
-          html,
-          body {
-              height: 100%;
-              margin: 500;
-          }
-  
-          .leaflet-container {
-              height: 400px;
-              width: 600px;
-              max-width: 100%;
-              max-height: 100%;
-          }
+        #mapId {
+          width: 1225px;
+          height: 550px;
+        }
 
- Load GeoJSON file
-fetch('maya_sites.geojson')
-  .then(response => response.json())
-  .then(data => {
-    // Load CSV file
-    d3.csv('radiocarbon1.csv').then(csvData => {
-      // Create an object to store the radiocarbon data
-      var radiocarbonData = {};
-      csvData.forEach(row => {
-        radiocarbonData[row.Site_Name] = {
-          num_of_dates: row.num_of_dates,
-          date_range: row.date_range,
-          time_period: row.time_period
-        };
-      });
+        #popup {
+          text-align: center;
+          background-color: blanchedalmond;
+          margin: 0%;
+          color: blue;
+        }
 
-      // Add GeoJSON layer with colored markers
-      L.geoJSON(data, {
-        pointToLayer: function (feature, latlng) {
-          var timePeriod = radiocarbonData[feature.properties.name].time_period;
-          var color;
-          switch (timePeriod) {
-            case '1':
-              color = 'yellow';
-              break;
-            case '2':
-              color = 'green';
-              break;
-            case '3':
-              color = 'red';
-              break;
-            default:
-              color = 'gray';
+        #popup2 {
+          text-align: center;
+          background-color: blanchedalmond;
+          margin: 0%;
+          color: orange;
+        }
+
+        #popup3 {
+          text-align: center;
+          background-color: blanchedalmond;
+          margin: 0%;
+          color: red;
+        }
+
+        #legend {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          z-index: 1000;
+          margin-bottom: 30px;
+          margin-right: 10px;
+          background-color: blanchedalmond;
+          border-radius: 5px;
+          padding: 5px 10px;
+          box-shadow: 0 0 2px rgb(0 0 0 / 10%);
+        }
+      </style>
+    </head>
+
+    <body>
+      <!--Map div and legend div. Legend div is inside map div to make sure it doesn't scroll on page-->
+      <div id="mapId">
+        <div id="legend">
+
+          <h1>
+            <font color="maroon">Legend</font>
+          </h1>
+          <h3>
+            <font color="blue">Time Period 1</font>
+          </h3>
+          <h3>
+            <font color="orange">Time Period 2</font>
+          </h3>
+          <h3>
+            <font color="red">Time Period 3</font>
+          </h3>
+
+
+        </div>
+      </div>
+
+
+
+      <script>
+        "use strict";
+
+        /* This works for creating colored markers based on time period perfectly. With AREA being time period.
+        
+        function pointToCircle(feature, latlng) {
+    
+          var fillColor_Var = "";
+    
+          if (Number(feature.properties["AREA"]) == 1) {
+            fillColor_Var = "yellow";
+          } else if (Number(feature.properties["AREA"]) == 2) {
+            fillColor_Var = "orange";
+          } else {
+            fillColor_Var = "red";
           }
-          return L.circleMarker(latlng, {
-            radius: 8,
-            fillColor: color,
-            color: "#000",
+    
+          var geojsonMarkerOptions = {
+            radius: 5,
+            fillColor: fillColor_Var,
+            color: "white",
             weight: 1,
             opacity: 1,
-            fillOpacity: 0.8
-          });
-        },
-        onEachFeature: function (feature, layer) {
-          // Tooltip
-          var tooltipText = `
-            <b>${feature.properties.name}</b><br>
-            Number of Dates: ${radiocarbonData[feature.properties.name].num_of_dates}<br>
-            Date Range: ${radiocarbonData[feature.properties.name].date_range}
-          `;
-          layer.bindTooltip(tooltipText);
+            fillOpacity:0.75
+          };
+        
+    
+          var circleMarker = L.circleMarker(latlng, geojsonMarkerOptions);
+    
+          return circleMarker; 
+        }*/
+
+
+        var map = L.map('mapId').setView([17.195, -88.687], 8);
+
+        var OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 20,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        });
+        OpenStreetMap_Mapnik.addTo(map);
+
+
+        //Maps for layers
+
+        var USGS_USImageryTopo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', {
+          maxZoom: 20,
+          attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
+        });
+
+
+
+
+
+        //Leaflet Layer Control
+
+        var baseMaps = {
+          'Open Street Map': OpenStreetMap_Mapnik,
+          'Topo': USGS_USImageryTopo,
         }
-      }).addTo(map);
-    }); 
-  }); 
 
-      </style>
-  
-  </head>
-  
-  <body>
-  
-      <div id="map" style="width: 100%; height: 500px;"></div>
-  
+        L.control.layers(baseMaps).addTo(map);
+
+
+        //Icons
+
+
+        var pulsingIcon1 = L.icon.pulse({ iconSize: [20, 20], fillColor: "blue", color: 'blue' });
+        var marker = L.marker([50, 15], { icon: pulsingIcon1 }).addTo(map);
+
+        var pulsingIcon2 = L.icon.pulse({ iconSize: [20, 20], fillColor: "orange", color: 'orange' });
+        var marker = L.marker([50, 15], { icon: pulsingIcon2 }).addTo(map);
+
+        var pulsingIcon3 = L.icon.pulse({ iconSize: [20, 20], fillColor: "red", color: 'red' });
+        var marker = L.marker([50, 15], { icon: pulsingIcon3 }).addTo(map);
+
+
+
+
+        //Add markers and popups individually. If added any other way, inspect throws a code from leaflet js file on the popup. I figured adding the popups here would be best to get a better operation of the functions.
+
+
+
+        // works for single marker and popup.
+        //Time Period 1
+
+        L.marker([16.8315813886916, -88.366459596224999], {
+          title: "Kendal",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><h1>Kendal</h1><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+        L.marker([17.746786408832701, -88.664366421492403], {
+          title: "Lamania",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><h1>Lamania</h1><img width="300px" height="100%" src="lamanai.jpg"><img width="300px" height="100%" src="lamanai3.jpg"></image></image><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+        L.marker([17.758469449128199, -88.347897466739099], {
+          title: "Colha",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><h1>Colha</h1><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+        L.marker([17.011840627360399, -89.100180562537204], {
+          title: "Mucnal Tunich",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><h1>Mucnal Tunich</h1><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+        L.marker([17.9757517370284, -88.395425800797199], {
+          title: "Colha",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><h1>Colha</h1><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+        L.marker([17.9876859340213, -88.487727420941894], {
+          title: "Kichpanha",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><h1>Kichpanha</h1><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+        L.marker([18.071477185875398, -88.621805613219905], {
+          title: "Cuella",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><h1>Cuella</h1><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+        L.marker([18.133427554511499, -88.497182771227301], {
+          title: "San Estavan",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><h1>San Estavan</h1><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+        L.marker([18.2015141822001, -88.156528601440797], {
+          title: "Shipstern",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><h1>Shipstern</h1><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+        L.marker([18.210500565819402, -88.579374364130999], {
+          title: "Nomhul",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><h1>Nomhul</h1><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+        L.marker([17.1100009867063, -89.145536368702693], {
+          title: "Xunantunich",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><div id="popup"><h1>Xunantunich</h1><img width="300" height="100%" src="xunantunich.jpg"></image><img width="300" height="100%" src="xunantunich2.jpg"></image><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+
+        L.marker([18.333421443574299, -88.358373061605306], {
+          title: "Cerros",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><h1>Cerros</h1><img width="300px" height="100%" src="cerros.jpg"></image><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+        L.marker([17.222213263923798, -88.971151957439005], {
+          title: "Barton Ramie",
+          icon: pulsingIcon1,
+        })
+          .bindPopup('<div id="popup"><h1>Barton Ramie</h1><p>Time Period: 1</p></div>')
+          .addTo(map);
+
+
+
+
+
+        // Time Period 2
+
+        L.marker([16.245871331638298, -89.099468489747196], {
+          title: "Uxbenka",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Uxbenka</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([16.3085105868475, -88.910005021498506], {
+          title: "Lubaantun",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Lubaantun</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([16.346990412320899, -88.818392365072398], {
+          title: "Nim li punit",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Nim li punit</h1><img width="300px" height="100%" src="nim-li-punit-jade-pendant.jpg"></image><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([16.3742531801167, -88.884482028598597], {
+          title: "Xnaheb",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Xnaheb</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([16.582615160092601, -88.375852704715797], {
+          title: "False Cay",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>False Cay</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([17.537133955819701, -88.181030857994998], {
+          title: "Moho Cay",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Moho Cay</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([17.561584426194599, -89.092228569007602], {
+          title: "Chan Chich",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Chan Chich</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([16.739387106896402, -89.107525403581604], {
+          title: "Caracol",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Caracol</h1><img width="300px" height="100%" src="caracol.jpg"></image><img width="300px" height="100%" src="caracol2.jpg"></image><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([16.770116571168401, -89.0445007214215], {
+          title: "Mountain Cow",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Mountain Cow</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([17.797027124882501, -89.037088914768404], {
+          title: "Las Milpas",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Las Milpas</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([17.798153433560699, -89.038999029648096], {
+          title: "Las Milpas",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Las Milpas</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([17.8991024100145, -87.986188183318305], {
+          title: "Marco Gonzalez",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Marco Gonzalez</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([17.011163923975701, -88.396481790526295], {
+          title: "Pomona",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Pomona</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([18.116805063516502, -88.661889223726604], {
+          title: "Rio Hondo",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Rio Hondo</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([17.088363841059401, -89.081780903427102], {
+          title: "Cahal Pech",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Cahal Pech</h1><img width="300px" height="100%" src="cahalpech.jpg"></image><img width="300px" height="100%" src="cahalpech2.jpg"></image><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([18.315785680439099, -88.478916245918896], {
+          title: "Aventura",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Aventura</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([17.2053827823955, -89.020013370353894], {
+          title: "Baking Pot",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Baking Pot</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([17.243923590678602, -89.152056367204096], {
+          title: "El Pilar",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>El Pilar</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+        L.marker([17.147722280856001, -89.118337418855106], {
+          title: "Buenavista del Cayo",
+          icon: pulsingIcon2,
+        })
+          .bindPopup('<div id="popup2"><h1>Buenavista del Cayo</h1><p>Time Period: 2</p></div>')
+          .addTo(map);
+
+
+        //Time Period 3
+
+
+        L.marker([16.230470323161299, -88.655748902842106], {
+          title: "Wild Cane Cay",
+          icon: pulsingIcon3,
+        })
+          .bindPopup('<div id="popup3"><h1>Wild Cane Cay</h1><p>Time Period: 3</p></div>')
+          .addTo(map);
+
+        L.marker([16.145542809917199, -88.722093373834994], {
+          title: "Frenchmans Cay",
+          icon: pulsingIcon3,
+        })
+          .bindPopup('<div id="popup3"><h1>Frenchmans Cay</h1><p>Time Period: 3</p></div>')
+          .addTo(map);
+
+        L.marker([17.045167465212501, -89.0764806474631], {
+          title: "Tipu",
+          icon: pulsingIcon3,
+        })
+          .bindPopup('<div id="popup3"><h1>Tipu</h1><p>Time Period: 3</p></div>')
+          .addTo(map);
+
+        L.marker([17.986155275633902, -88.640879576140193], {
+          title: "El Pozito",
+          icon: pulsingIcon3,
+        })
+          .bindPopup('<div id="popup3"><h1>El Pozito</h1><p>Time Period: 3</p></div>')
+          .addTo(map);
+
+        L.marker([18.324332086985699, -88.160557776243294], {
+          title: "Sarteneja",
+          icon: pulsingIcon3,
+        })
+          .bindPopup('<div id="popup3"><h1>Sarteneja</h1><p>Time Period: 3</p></div>')
+          .addTo(map);
+
+        L.marker([18.412862059035401, -88.374942590036099], {
+          title: "Santa Maria",
+          icon: pulsingIcon3,
+        })
+          .bindPopup('<div id="popup3"><h1>Santa Maria</h1><p>Time Period: 3</p></div>')
+          .addTo(map);
+
+
+
+        /* L.geoJSON(mayaSites, {
+           onEachFeature: addPopups
+         }).addTo(map); */
+
+        /*var mayaSites = L.geoJSON(mayaSites, {
+          onEachFeature: addPopups,
+          pointToLayer: pointToCircle,
+        });
       
-      <script>
-  
-          const map = L.map('map').setView([17.195, -88.687], 7.5);
-  
-          const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-              maxZoom: 10,
-              attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          }).addTo(map);
+        map.addLayer(mayaSites);
+        map.fitBounds(mayaSites.getBounds());
+      */
 
 
-  
-  
-  
       </script>
+    </body>
+
+    </html>
 
 
-      <!--End map code-->
 
 
-</div>
-<div id="About" class="container-fluid text-center">
+    <!--End map code-->
+
+
+  </div>
+  <div id="About" class="container-fluid text-center">
     <!--Information about why MayaMap is useful/goals with MayaMap-->
-  <h1>About MayaMap</h1>
-  <p>MayaMap: An Interactive RadioCarbon Map is a comprehensive digital representation of radiocarbon dates for the Maya civilization in Belize, showcasing the extensive bioarchaeological chronology of the region. While most interactive maps provide basic information about archaeological sites, they often lack detailed data on occupation dates and radiocarbon chronologies, which are crucial for understanding the temporal aspects of ancient civilizations. By providing this detailed information, MayaMap offers researchers, students, and enthusiasts a valuable new resource for exploring the temporal aspects of Maya civilization. 
+    <h1>About MayaMap</h1>
+    <p>MayaMap: An Interactive RadioCarbon Map is a comprehensive digital representation of radiocarbon dates for the
+      Maya civilization in Belize, showcasing the extensive bioarchaeological chronology of the region. While most
+      interactive maps provide basic information about archaeological sites, they often lack detailed data on occupation
+      dates and radiocarbon chronologies, which are crucial for understanding the temporal aspects of ancient
+      civilizations. By providing this detailed information, MayaMap offers researchers, students, and enthusiasts a
+      valuable new resource for exploring the temporal aspects of Maya civilization.
 
-    This project aims to make complex archaeological data more accessible and engaging. Users can explore the map to understand the chronological sequence of Maya sites, facilitating comparative analysis and research. MayaMap also serves as an educational tool, offering insights into the cultural evolution and historical context of the Maya civilization. Additionally, by leveraging open-source data, MayaMap contributes to the broader archaeological community by providing a precedent for sharing and accessing valuable research findings. </p>
-    
+      This project aims to make complex archaeological data more accessible and engaging. Users can explore the map to
+      understand the chronological sequence of Maya sites, facilitating comparative analysis and research. MayaMap also
+      serves as an educational tool, offering insights into the cultural evolution and historical context of the Maya
+      civilization. Additionally, by leveraging open-source data, MayaMap contributes to the broader archaeological
+      community by providing a precedent for sharing and accessing valuable research findings. </p>
+
     <h2>SUBGOALS</h2>
-    
-   <h4>Comprehensive Data Representation:</h4><p> MayaMap will provide a detailed and comprehensive representation of radiocarbon dates for the Maya civilization, integrating data from multiple sources to create a rich and informative dataset.
-    
-    Interactive Exploration: The map will offer users an interactive experience, allowing them to explore radiocarbon dates for different Maya sites, regions, and time periods, enabling comparative analysis and facilitating research.</p>
-    
-    <h4>Educational Resource:</h4><p> MayaMap will serve as an educational resource, offering insights into the cultural evolution and historical context of the Maya civilization, making complex archaeological data more accessible and engaging.</p>
-    
-    <h4>Contribution to Archaeological Research:</h4><p> By leveraging open-source data and providing a platform for sharing and accessing valuable research findings, MayaMap aims to contribute to the broader archaeological community and promote collaboration and knowledge exchange.</p>
-    
-    <h4>User-Friendly Interface:</h4><p> MayaMap will feature a user-friendly interface, making it easy for users to navigate and explore radiocarbon dates, site information, and historical context, enhancing the overall user experience.
-    
-    By achieving these sub-goals, MayaMap seeks to provide a valuable resource for researchers, students, and enthusiasts interested in the Maya civilization, offering a new perspective on the temporal aspects of Maya culture and history.
+
+    <h4>Comprehensive Data Representation:</h4>
+    <p> MayaMap will provide a detailed and comprehensive representation of radiocarbon dates for the Maya civilization,
+      integrating data from multiple sources to create a rich and informative dataset.
+
+      Interactive Exploration: The map will offer users an interactive experience, allowing them to explore radiocarbon
+      dates for different Maya sites, regions, and time periods, enabling comparative analysis and facilitating
+      research.</p>
+
+    <h4>Educational Resource:</h4>
+    <p> MayaMap will serve as an educational resource, offering insights into the cultural evolution and historical
+      context of the Maya civilization, making complex archaeological data more accessible and engaging.</p>
+
+    <h4>Contribution to Archaeological Research:</h4>
+    <p> By leveraging open-source data and providing a platform for sharing and accessing valuable research findings,
+      MayaMap aims to contribute to the broader archaeological community and promote collaboration and knowledge
+      exchange.</p>
+
+    <h4>User-Friendly Interface:</h4>
+    <p> MayaMap will feature a user-friendly interface, making it easy for users to navigate and explore radiocarbon
+      dates, site information, and historical context, enhancing the overall user experience.
+
+      By achieving these sub-goals, MayaMap seeks to provide a valuable resource for researchers, students, and
+      enthusiasts interested in the Maya civilization, offering a new perspective on the temporal aspects of Maya
+      culture and history.
     </p>
-</div>
+  </div>
 
-<div id="Authors" class="container-fluid text-center">
-  <h1>About the Authors</h1>
-  <p>MayaMap was made by Alex Tierney and Adam Guernsey, students at the University of New Mexico, with instruction by Dr. Liping Yang in the Geography department. </p>
-  <p><a href="https://xitlalitierney.github.io/">Alex Tierney</a></p>
-  <p><a href="https://aguernsey505.github.io/">Adam Guernsey</a></p>
-  <p><a href="https://lipingyang.org/index.html">Dr. Liping Yang</a></p>
-</div>
+  <div id="Authors" class="container-fluid text-center">
+    <h1>About the Authors</h1>
+    <p>MayaMap was made by Alex Tierney and Adam Guernsey, students at the University of New Mexico, with instruction by
+      Dr. Liping Yang in the Geography department. </p>
+    <p><a href="https://xitlalitierney.github.io/">Alex Tierney</a></p>
+    <p><a href="https://aguernsey505.github.io/">Adam Guernsey</a></p>
+    <p><a href="https://lipingyang.org/index.html">Dr. Liping Yang</a></p>
+  </div>
 
-<div id="Resources" class="container-fluid text-center">
-  <h1>Resources</h1>
-  <p><a href="https://openarchaeologydata.metajnl.com/articles/10.5334/joad.83">Journal of Open Archaeology Data</a></p>
-      <p><a href="https://pandoradata.earth/dataset/lowland-maya-radiocarbon-dates">MeosRAD v1.4: Lowland Maya Radiocarbon Dates</a></p>
-  <p>Select open source data from the research of Julie Hoggarth, Claire E. Ebert, and Victor E. Castelazo-Calva, published in the Journal of Open Archaeology Data was used to create the data points on this map.</p>
-  <p><a href="https://www.w3schools.com/bootstrap/bootstrap_scrollspy.asp">Bootstrap</a>, <a href="https://leafletjs.com/">Leaflet</a>, and <a href="https://www.openstreetmap.org/#map=8/17.015/-88.616">OpenStreetMaps</a> were also used to create this website.</p>
-</div>
+  <div id="Resources" class="container-fluid text-center">
+    <h1>Resources</h1>
+    <p><a href="https://openarchaeologydata.metajnl.com/articles/10.5334/joad.83">Journal of Open Archaeology Data</a>
+    </p>
+    <p><a href="https://pandoradata.earth/dataset/lowland-maya-radiocarbon-dates">MeosRAD v1.4: Lowland Maya Radiocarbon
+        Dates</a></p>
+    <p>Select open source data from the research of Julie Hoggarth, Claire E. Ebert, and Victor E. Castelazo-Calva,
+      published in the Journal of Open Archaeology Data was used to create the data points on this map.</p>
+    <p><a href="https://www.w3schools.com/bootstrap/bootstrap_scrollspy.asp">Bootstrap</a>, <a
+        href="https://leafletjs.com/">Leaflet</a>,<a
+        href="https://www.usgs.gov/programs/national-geospatial-program/topographic-maps">USGS</a>, and <a
+        href="https://www.openstreetmap.org/#map=8/17.015/-88.616">OpenStreetMaps</a> were also used to create this
+      website.</p>
+      <p>Photos from <a
+        href="https://www.istockphoto.com/photos/belize-mayan-ruins ">iStockPhoto.</a></p>
+
+      
+  </div>
 
 </body>
+
 </html>
 
 
 
-<!--Do Legend and tooltip-->
